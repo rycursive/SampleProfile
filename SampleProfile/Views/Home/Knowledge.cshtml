@@ -1,0 +1,16 @@
+﻿@model IEnumerable<SampleProfile.ViewModels.KnowledgeViewModel>
+<div class="s2">
+    <h3>Knowledges</h3>
+    <div class="row demo-tiles">
+        @foreach(var knowledge in Model)
+        {
+            <div class="span3">
+                <div class="tileCenter">
+                    <img src="images/icons/@Html.DisplayFor(m => knowledge.imageSrc)@(".png")" alt="@Html.DisplayFor(m => knowledge.imageSrc)" class="tile-image big-illustration">
+                    <h5 class="tile-title">@Html.DisplayFor(m => knowledge.Knowledge.Title)</h5>
+                    <p>@Html.DisplayFor(m => knowledge.Knowledge.Detail)</p>
+                </div>
+            </div>
+        }
+    </div>
+</div> <!-- /tiles -->

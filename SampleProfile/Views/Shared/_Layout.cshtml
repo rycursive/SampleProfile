@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My Profile</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/bootstrapcss")
+        @Styles.Render("~/Content/flatcss")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <div class="content-wrapper">
+                    <div >
+                        <p class="site-title">@Html.ActionLink("My Profile", "Index", "Home")</p>
+                    </div>
+                    <div class="clear-both">
+                        <section id="login">
+                            @Html.Partial("_LoginPartial")
+                        </section>
+                        <div class="container navbar navbar-inverse subMenu">
+                            <div class="navbar-inner">
+                                <ul class="nav">
+                                    <li class="active" id="sTop">
+                                        <a href="#">Home</a>
+                                    </li>
+                                    <li id="s1">
+                                        <a href="#">Skills</a>
+                                    </li>
+                                    <li id="s2">
+                                        <a href="#">Knowledges</a>
+                                    </li>
+                                    <li id="s3">
+                                        <a href="#">Experiences</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="clear-both">
+                @RenderSection("featured", required: false)
+                <section>
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+            <div class="span7">
+                <h3 class="footer-title">About</h3>
+                <p>This is sample website project which is created by Asp.net MVC4.5, Entity framwork, Ninject,
+                    HTML5, CSS3 and JQuery. It host on Microsoft Azure. The awesome user interface was desiged by Designmodo. 
+                    Source code available on <a href="https://github.com/rycursive/SampleProfile" target="_blank">https://github.com/rycursive/SampleProfile</a>
+                </p>
+                
+            </div> <!-- /span8 -->
+
+            <div class="span5">
+                <div class="footer-banner">
+                    <h3 class="footer-title">Contact me</h3>
+                    <p>
+                        <span>EmailAddress</span>
+                        <a href="mailto:signheart@gmail.com">Signheart@gmail.com</a>
+                    </p>
+                    <p>
+                        <span>LinkinAddress</span>
+                        <a href="http://th.linkedin.com/in/seksan">th.linkedin.com/in/seksan/</a>
+                    </p>
+              
+                </div>
+            </div>
+        </div>
+            </div>
+        </footer>
+        
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

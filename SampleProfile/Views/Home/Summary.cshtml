@@ -1,0 +1,57 @@
+﻿@model SampleProfile.Model.Profile
+
+@{
+    var duration = DateTime.MinValue + (DateTime.Now - new DateTime(2008, 04, 01));
+    var months = duration.Month - 1;
+    var years = duration.Year - 1;
+    string extStr = months != 0 ? years + " years " + months + " months " : years + " years ";
+}
+<div class="row sTop">
+    <div class="span7">
+        <div class="demo-browser">
+            <div class="demo-browser-side">
+                <div class="demo-browser-author">
+                    <img src="images/demo/seksan.jpg" alt="" />
+                </div>
+                <div class="demo-browser-action">
+                    <a class="btn btn-danger btn-large btn-block" href="https://twitter.com/sighartz" target="_blank">
+                        Follow
+                    </a>
+                </div>
+            </div>
+            <div class="demo-browser-content">
+                <header>
+                    <h3 class="demo-headings">@Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m=>m.LastName)</h3>
+                </header>
+                 
+                <p>
+                    <span class="label">@Html.DisplayNameFor(m => m.Birthday):</span>
+                    <span>@Html.DisplayFor(m => m.Birthday)</span>
+                </p>
+                      
+                <p>
+                    <span class="label">@Html.DisplayNameFor(m => m.Gender):</span>
+                    <span>@Html.DisplayFor(m => m.Gender)</span>
+                </p>
+                <p>
+                    <span class="label">@Html.DisplayNameFor(m => m.Education):</span>
+                    <span>@Html.DisplayFor(m => m.Education)</span>
+                </p>
+                <p>
+                    <span class="label">@Html.DisplayNameFor(m => m.PhoneNumber):</span>
+                    <span>@Html.DisplayFor(m => m.PhoneNumber)</span>
+                </p>
+                     
+            </div>
+        </div>
+    </div>
+    <div class="span5">
+        <div class="tile demo-content">
+            @*<img src="images/icons/Clipboard@2x.png" alt="Clipboard">*@
+            <header>
+                <h3 class="tile-title">Summary</h3>
+            </header>
+            <p>   - @Model.Summary.Replace("{exp}", @extStr)</p>
+        </div>
+    </div>
+</div> 

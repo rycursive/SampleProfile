@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NPatterns</id>
+    <version>1.0.4826</version>
+    <title>NPatterns</title>
+    <authors>Tao Wang</authors>
+    <owners>Tao Wang</owners>
+    <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+    <projectUrl>https://github.com/moonavw/NPatterns</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Common Patterns used in projects, like Repository, UnitOfWork, MessageBus, QueryObject etc</description>
+    <releaseNotes>new feature to msgbus, able to callback when all handler done in async</releaseNotes>
+    <copyright />
+    <language>en-US</language>
+    <tags>patterns eaa</tags>
+    <references>
+      <reference file="NPatterns.dll" />
+    </references>
+  </metadata>
+</package>

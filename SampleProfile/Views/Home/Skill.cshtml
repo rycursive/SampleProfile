@@ -1,0 +1,19 @@
+﻿@model IEnumerable<SampleProfile.ViewModels.SkillViewModel>
+
+
+@*skill*@
+<div class="s1">
+    <h3>Skills</h3>
+    <div class="row">
+        <div class="span9">
+            @foreach (var skill in Model)
+            {
+                <div class="skillbar clearfix " data-percent="@Html.DisplayFor(m =>skill.ProgrammingSkill.Level)%">
+                    <div class="skillbar-title @Html.DisplayFor(s => skill.TitleColor)" ><span>@Html.DisplayFor(s => skill.ProgrammingSkill.Name)</span></div>
+                    <div class="skillbar-bar @Html.DisplayFor(s => skill.BarColor)" ></div>
+                    <div class="skill-bar-percent">@Html.DisplayFor(s => skill.ProgrammingSkill.Level)%</div>
+                </div>
+            } 
+        </div>
+    </div>
+</div>

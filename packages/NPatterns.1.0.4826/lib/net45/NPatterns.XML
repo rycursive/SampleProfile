@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NPatterns</name>
+    </assembly>
+    <members>
+        <member name="T:NPatterns.Disposer">
+            <summary>
+            Invokes the registered callback on disposed
+            </summary>
+        </member>
+        <member name="M:NPatterns.Disposer.#ctor(System.Action)">
+            <summary>
+            Instantiate a Disposer
+            </summary>
+            <param name="callOnDispose">callback to invoke on disposed</param>
+        </member>
+        <member name="T:NPatterns.IHandler`1">
+            <summary>
+            A handler could handle a specified message, like command, event, request etc
+            </summary>
+            <typeparam name="T">type of the message</typeparam>
+        </member>
+        <member name="M:NPatterns.IHandler`1.Handle(`0)">
+            <summary>
+            Handle the message
+            </summary>
+            <param name="message">message to be handled</param>
+        </member>
+        <member name="P:NPatterns.IHandler`1.Order">
+            <summary>
+            handlers for the same kind of message would handle it by the order
+            </summary>
+        </member>
+        <member name="T:NPatterns.Messaging.IMessageBus">
+            <summary>
+            Contract for "Message bus a.k.a Event bus pattern".
+            </summary>
+        </member>
+        <member name="M:NPatterns.Messaging.IMessageBus.Subscribe``1(System.Action{``0},System.Nullable{System.Int32})">
+            <summary>
+            register a callback for a message type.
+            the callback will be invoked when the message published on bus
+            </summary>
+            <typeparam name="T">type of message</typeparam>
+            <param name="callback">callback action</param>
+            <param name="order">a sequence number that mark this callback would be invoked in sequence</param>
+            <returns>disposer to remove the callback from bus</returns>
+        </member>
+        <member name="M:NPatterns.Messaging.IMessageBus.Subscribe``1(NPatterns.IHandler{``0})">
+            <summary>
+            register a handler for a message type.
+            the hanlder will be invoked when the message published on bus
+            </summary>
+            <typeparam name="T">type of message</typeparam>
+            <param name="handler">handler that handle message</param>
+            <returns>disposer to remove the callback from bus</returns>
+        </member>
+        <member name="M:NPatterns.Messaging.IMessageBus.Publish``1(``0)">
+            <summary>
+            publish a message on bus.
+            all matched registered/hanlder callback will handle this message
+            </summary>
+            <typeparam name="T">type of message</typeparam>
+            <param name="message">message</param>
+            <returns>true if any subscriber process the message, false if no subscriber process it</returns>
+        </member>
+        <member name="M:NPatterns.Messaging.IMessageBus.PublishAsync``1(``0,System.Action,System.Action)">
+            <summary>
+            publish a message on bus.
+            all matched registered callback/hanlder will handle this message asynchronously
+            </summary>
+            <typeparam name="T">type of message</typeparam>
+            <param name="message">message</param>
+            <param name="callbackOnAllDone">a callback invoked when the message handled by all registered callback/handler</param>
+            <param name="callbackOnAnyDone">a callback invoked when the message handled by any registered callback/handler, so it would be invoked when each callback/handler handling the message</param>
+            <returns>true if any subscriber process the message, false if no subscriber process it</returns>
+        </member>
+        <member name="T:NPatterns.Messaging.MessageBus">
+            <summary>
+            implement the MessageBus with concurrent collection
+            </summary>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.Criteria">
+            <summary>
+            A Filter Descriptor for QueryObject
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.Criteria.Field">
+            <summary>
+            filter by field
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.Criteria.Operator">
+            <summary>
+            filter operator
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.Criteria.Value">
+            <summary>
+            filter by what value, e.g. "field >= value"
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.Criteria.Valid">
+            <summary>
+            has field or not
+            </summary>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.CriteriaGroup">
+            <summary>
+            A collection of Criteria for QueryObject
+            </summary>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.CriteriaGroup.#ctor">
+            <summary>
+            initialize a criteria group
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.CriteriaGroup.Criterias">
+            <summary>
+            Criteria in this Group
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.CriteriaGroup.Operator">
+            <summary>
+            logical operator (AND|OR) for concatenating the collection of criteria. 
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.CriteriaGroup.Valid">
+            <summary>
+            has criteria or not
+            </summary>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.CriteriaGroupOperator">
+            <summary>
+            Logical operator
+            </summary>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.CriteriaOperator">
+            <summary>
+            Filter operator for criteria
+            </summary>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.IQueryObjectExecutor">
+            <summary>
+            interface for executing an query object
+            </summary>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IQueryObjectExecutor.Execute``1(System.Linq.IQueryable{``0},NPatterns.ObjectRelational.QueryObject)">
+            <summary>
+            Execute the QueryObject on source
+            </summary>
+            <typeparam name="T">type of the element in source</typeparam>
+            <param name="source">queryable source to query</param>
+            <param name="query">query object to execute</param>
+            <returns>queryable result</returns>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.QueryObject">
+            <summary>
+            implement a "QueryObject Pattern", for
+            more information about this pattern see http://martinfowler.com/eaaCatalog/queryObject.html
+            </summary>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.QueryObject.#ctor(NPatterns.ObjectRelational.IQueryObjectExecutor)">
+            <summary>
+            initialize an instance of query object with query object executor
+            </summary>
+            <param name="executor">an implement of IQueryObjectExecutor that could execute this query object</param>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.QueryObject.Add(NPatterns.ObjectRelational.Criteria,NPatterns.ObjectRelational.CriteriaGroupOperator)">
+            <summary>
+            append criteria with logical operator to this query object
+            </summary>
+            <param name="criteria">criteria to add</param>
+            <param name="op">AND|OR the criteria</param>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.QueryObject.Add(NPatterns.ObjectRelational.CriteriaGroup,NPatterns.ObjectRelational.CriteriaGroupOperator)">
+            <summary>
+            append criteria group with logical operator to this query object
+            </summary>
+            <param name="criteriaGroup">criteria group to add</param>
+            <param name="op">AND|OR the criteria group</param>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.QueryObject.Add(NPatterns.ObjectRelational.SortDescription)">
+            <summary>
+            append sort description for this query
+            </summary>
+            <param name="sortDescription"></param>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.QueryObject.Execute``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Execute the QueryObject on source
+            </summary>
+            <typeparam name="T">type of the element in source</typeparam>
+            <param name="source">queryable source to query</param>
+            <returns>queryable result</returns>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.QueryObject.CriteriaGroups">
+            <summary>
+            appended criteria groups in this Query object.
+            each group has a logical operator for concatenating groups
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.QueryObject.SortDescriptions">
+            <summary>
+            sorting by a list of fields
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.QueryObject.HasCriteria">
+            <summary>
+            has criteria or not
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.QueryObject.HasSortDescription">
+            <summary>
+            has sort description or not
+            </summary>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.IRepository`1">
+            <summary>
+            Base interface for implement a "Repository Pattern", for
+            more information about this pattern see http://martinfowler.com/eaaCatalog/repository.html
+            </summary>
+            <typeparam name="TEntity">Type of entity for this repository </typeparam>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IRepository`1.AsQueryable">
+            <summary>
+            Convert to IQueryable for querying
+            </summary>
+            <returns>IQueryable for entity</returns>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IRepository`1.FindAll(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Find all elements by predicate
+            </summary>
+            <param name="predicate">expression of predicate</param>
+            <returns>queryable result</returns>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IRepository`1.Find(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Find single(first or default) element by predicate
+            </summary>
+            <param name="predicate">expression of predicate</param>
+            <returns>entity</returns>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IRepository`1.Add(`0)">
+            <summary>
+            Add entity into repository
+            </summary>
+            <param name="entity">Item to add</param>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IRepository`1.Remove(`0)">
+            <summary>
+            Delete entity from repository
+            </summary>
+            <param name="entity">Item to delete</param>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IRepository`1.Modify(`0)">
+            <summary>
+            Mark entity as modified
+            </summary>
+            <param name="entity">Item to modify</param>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IRepository`1.Track(`0)">
+            <summary>
+            Track entity into this repository
+            </summary>
+            <param name="entity">Item to track</param>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IRepository`1.Merge(`0,`0)">
+            <summary>
+            Sets modified entity into the repository. 
+            When calling Commit() method in UnitOfWork 
+            these changes will be saved into the storage
+            </summary>
+            <param name="original">The persisted item</param>
+            <param name="current">The current item</param>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.IUnitOfWork">
+            <summary>
+            Contract for "UnitOfWork pattern". For more
+            related info see http://martinfowler.com/eaaCatalog/unitOfWork.html or
+            http://msdn.microsoft.com/en-us/magazine/dd882510.aspx
+            </summary>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IUnitOfWork.Commit">
+             <summary>
+             Commit all changes made in a container.
+             </summary>
+            <remarks>
+             If the entity have fixed properties and any optimistic concurrency problem exists,  
+             then an exception is thrown
+            </remarks>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IUnitOfWork.CommitAndRefresh">
+             <summary>
+             Commit all changes made in  a container.
+             </summary>
+            <remarks>
+             If the entity have fixed properties and any optimistic concurrency problem exists,
+             then 'client changes' are refreshed - Client wins
+            </remarks>
+        </member>
+        <member name="M:NPatterns.ObjectRelational.IUnitOfWork.Rollback">
+            <summary>
+            Rollback tracked changes. See references of UnitOfWork pattern
+            </summary>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.SortDescription">
+            <summary>
+            object to describe the sorting
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.SortDescription.Field">
+            <summary>
+            sort by field (order by this field)
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.SortDescription.Direction">
+            <summary>
+            asc or desc
+            </summary>
+        </member>
+        <member name="P:NPatterns.ObjectRelational.SortDescription.Valid">
+            <summary>
+            has field or not
+            </summary>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.SortDirection">
+            <summary>
+            sort direction for sort description
+            </summary>
+        </member>
+    </members>
+</doc>

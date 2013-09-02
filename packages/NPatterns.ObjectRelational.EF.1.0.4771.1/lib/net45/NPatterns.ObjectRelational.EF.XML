@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NPatterns.ObjectRelational.EF</name>
+    </assembly>
+    <members>
+        <member name="T:NPatterns.ObjectRelational.EF.Repository`1">
+            <summary>
+            implement the IRepository with EF
+            </summary>
+            <typeparam name="TEntity">type of the entity in this repository</typeparam>
+        </member>
+        <member name="T:NPatterns.ObjectRelational.EF.UnitOfWork">
+            <summary>
+            implement the IUnitOfWork with EF
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NPatterns.ObjectRelational.EF</id>
+    <version>1.0.4771.1</version>
+    <title>NPatterns.ObjectRelational.EF</title>
+    <authors>Tao Wang</authors>
+    <owners>Tao Wang</owners>
+    <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+    <projectUrl>https://github.com/moonavw/NPatterns</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>implementation of IRepository, IUnitOfWork with EntityFramework.</description>
+    <releaseNotes>make UoW, Repo disposable</releaseNotes>
+    <copyright />
+    <language>en-US</language>
+    <tags>patterns</tags>
+    <dependencies>
+      <dependency id="EntityFramework" version="5.0.0" />
+      <dependency id="NPatterns" version="1.0.4771" />
+    </dependencies>
+    <references>
+      <reference file="NPatterns.ObjectRelational.EF.dll" />
+    </references>
+  </metadata>
+</package>

@@ -1,0 +1,30 @@
+﻿@model SampleProfile.Model.Profile
+
+<div class="s3">
+    <h3>Experiences</h3>
+    <div class="row">
+        <div class="main">
+            <ul class="cbp_tmtimeline">
+                @foreach (var exp in @Model.Experiences)
+                {
+                    <li>
+                        <time class="cbp_tmtime">
+                            <span>@exp.EndDate.ToString("dd MMM yyyy")</span>
+                            <span>@exp.StartDate.ToString("dd MMM yyyy")</span>
+                        </time>
+                        <div class="cbp_tmicon cbp_tmicon-earth"></div>
+                        <div class="cbp_tmlabel">
+                            <h2>@exp.CompanyName</h2>
+                            <ul>
+                                @foreach (var detail in exp.Detail.Split(new[]{"-"}, StringSplitOptions.RemoveEmptyEntries))
+                                {
+                                    <li>@detail</li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

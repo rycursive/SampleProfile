@@ -1,0 +1,35 @@
+﻿@model SampleProfile.Model.Profile
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section scripts
+{
+
+    @Scripts.Render("~/bundles/skillbar")
+    @Scripts.Render("~/bundles/smint")
+    @Scripts.Render("~/bundles/custom")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/flatjs")
+}
+
+@{
+    if (Model != null)
+    {
+        Html.RenderPartial("Summary", Model);
+        Html.RenderAction("Skill", new {skills = Model.ProgrammingSkills});
+        Html.RenderAction("Knowledge", new {knowledges = Model.ProgrammingKnowledges});
+        Html.RenderPartial("Experience", Model);
+    }
+    else
+    {
+        <h3>Set up the development environment.</h3>
+        <p>No the data in Database. To start, set up your development data by using Entity Framwork Migration.</p>
+        <ol>
+            <li>In the <b>Tools</b> menu, select <b>Library Package Manager</b> and then <b>Package Manager Console</b>.</li>
+            <li>In the Package Manager Console window, enter the following command: <b>enable-migrations</b>.</li>
+            <li>In the Package Manager Console enter the command: <b>update-database</b>.</li>
+        </ol>
+    }
+}
